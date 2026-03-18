@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Report Card Writer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Report card tools</p>
+          <h1>Student Report Card Writer</h1>
+          <p class="subtle">Upload comment banks in Settings, then load a student CSV to complete report cards in the browser.</p>
+        </div>
+        <div class="topbar-actions">
+          <button id="downloadCsvBtn" class="primary">Download CSV</button>
+          <button id="openSettingsBtn">Settings</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="panel controls-panel">
+          <div class="upload-block">
+            <label for="studentCsvInput" class="upload-label">Upload student CSV</label>
+            <input id="studentCsvInput" type="file" accept=".csv,text/csv" />
+            <p class="helper-text">Expected columns: Surname, Forename, House, Progress Towards Target, Approach to Learning, Achievement Grade, Target, Comment</p>
+          </div>
+
+          <div class="filters">
+            <div>
+              <label for="yearGroupSelect">Year group</label>
+              <select id="yearGroupSelect">
+                <option value="">Select year group</option>
+              </select>
+            </div>
+            <div>
+              <label for="topicSelect">Topic</label>
+              <select id="topicSelect" disabled>
+                <option value="">Select topic</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel summary-panel">
+          <p id="statusMessage">No student CSV loaded yet.</p>
+        </section>
+
+        <section class="panel table-panel">
+          <div class="table-wrap">
+            <table id="studentTable">
+              <thead>
+                <tr>
+                  <th>Surname</th>
+                  <th>Forename</th>
+                  <th>House</th>
+                  <th>Progress Towards Target</th>
+                  <th>Approach to Learning</th>
+                  <th>Achievement Grade</th>
+                  <th>Target</th>
+                  <th>Comment</th>
+                </tr>
+              </thead>
+              <tbody id="studentTableBody">
+                <tr>
+                  <td colspan="8" class="empty-state">Upload a student CSV to begin.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="settingsDialog">
+      <form method="dialog" class="modal-card settings-card">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">Settings</p>
+            <h2>Upload comment bank</h2>
+          </div>
+          <button type="submit" class="ghost">Close</button>
+        </div>
+        <div class="modal-content">
+          <label for="settingsCsvInput" class="upload-label">Upload comments CSV</label>
+          <input id="settingsCsvInput" type="file" accept=".csv,text/csv" />
+          <p class="helper-text">Expected columns: year group, topic, comment</p>
+          <div id="commentBankSummary" class="comment-bank-summary"></div>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="commentDialog">
+      <div class="modal-card comment-card">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">Comment picker</p>
+            <h2 id="commentDialogTitle">Select a comment</h2>
+          </div>
+          <button id="closeCommentDialogBtn" class="ghost" type="button">Close</button>
+        </div>
+        <div id="commentList" class="comment-list"></div>
+      </div>
+    </dialog>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
